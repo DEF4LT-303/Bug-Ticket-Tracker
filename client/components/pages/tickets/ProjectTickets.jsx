@@ -1,6 +1,7 @@
 import CancelIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
+import MoreVert from '@mui/icons-material/MoreVert';
 import SaveIcon from '@mui/icons-material/Save';
 import { Card, CardActions, CardContent, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -120,6 +121,10 @@ function ProjectTickets() {
     setDeleteID({ projectId, ticket_id });
   };
 
+  const handleMoreClick = (ticket_id) => () => {
+    router.push(`/tickets/${ticket_id}`);
+  };
+
   const handleCancelClick = (id) => () => {
     setRowModesModel({
       ...rowModesModel,
@@ -144,9 +149,9 @@ function ProjectTickets() {
     return newRow;
   };
 
-  const handleRowClick = (params) => {
-    router.push(`/tickets/${params.id}`);
-  };
+  // const handleRowClick = (params) => {
+  //   router.push(`/tickets/${params.id}`);
+  // };
 
   const columns = [
     { headerName: 'Ticket ID', field: 'ticket_id', flex: 1 },
@@ -231,6 +236,17 @@ function ProjectTickets() {
             }
             label='Delete'
             onClick={handleDeleteClick(id)}
+            color='inherit'
+          />,
+          <GridActionsCellItem
+            icon={
+              <MoreVert
+                color='disabled'
+                // sx={{ '&:hover': { color: 'red' } }}
+              />
+            }
+            label='More'
+            onClick={handleMoreClick(id)}
             color='inherit'
           />
         ];
@@ -351,7 +367,7 @@ function ProjectTickets() {
             toolbar: { setRowModesModel }
           }}
           experimentalFeatures={{ newEditingApi: true }}
-          onRowClick={handleRowClick}
+          // onRowClick={handleRowClick}
           onProcessRowUpdateError={(err) => {
             console.log(err);
           }}
