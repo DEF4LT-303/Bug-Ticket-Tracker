@@ -33,7 +33,7 @@ function EditToolbar() {
   return (
     <GridToolbarContainer>
       <DialogComponent
-        title='Provide project details'
+        title='Provide Ticket Details'
         buttonTitle='Create Ticket'
       >
         <CreateTicketForm handleCreateTicket={createTicket} />
