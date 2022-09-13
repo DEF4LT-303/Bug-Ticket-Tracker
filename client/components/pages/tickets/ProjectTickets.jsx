@@ -127,15 +127,20 @@ function ProjectTickets() {
     });
   };
 
+  // const processRowUpdate = (newRow) => {
+  //   const { created_at } = newRow;
+  //   const yyyy = created_at.getFullYear();
+  //   const mm = created_at.getMonth() + 1;
+  //   const dd = created_at.getDate();
+  //   const formattedDate = `${mm}-${dd}-${yyyy}`;
+  //   const updatedRow = { ...newRow, created_at: formattedDate };
+  //   console.log(newRow.created_at, formattedDate);
+  //   updateTicket(updatedRow);
+  //   return newRow;
+  // };
+
   const processRowUpdate = (newRow) => {
-    const { created_at } = newRow;
-    const yyyy = created_at.getFullYear();
-    const mm = created_at.getMonth() + 1;
-    const dd = created_at.getDate();
-    const formattedDate = `${mm}-${dd}-${yyyy}`;
-    const updatedRow = { ...newRow, created_at: formattedDate };
-    console.log(newRow.created_at, formattedDate);
-    updateTicket(updatedRow);
+    updateTicket(newRow);
     return newRow;
   };
 
