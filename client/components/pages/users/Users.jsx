@@ -82,7 +82,7 @@ function Users() {
       headerName: 'Role',
       field: 'user_authority',
       type: 'singleSelect',
-      valueOptions: ['admin', 'developer', 'user'],
+      valueOptions: ['admin', 'developer'],
       editable: true,
       flex: 1
     },
