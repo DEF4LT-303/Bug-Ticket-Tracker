@@ -79,7 +79,7 @@ function ProjectTickets() {
   if (typeof window !== 'undefined') {
     let auth = localStorage.getItem('auth');
     React.useEffect(() => {
-      if (auth === 'admin' || auth === 'developer') {
+      if (auth === 'admin') {
         setIsAdmin(true);
       }
     }, [auth]);
