@@ -56,6 +56,16 @@ function Projects() {
   const [open, setOpen] = React.useState(false);
   const [deleteID, setDeleteID] = React.useState();
   const { mutate: updateProject } = useUpdateProject();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  if (typeof window !== 'undefined') {
+    let auth = localStorage.getItem('auth');
+    useEffect(() => {
+      if (auth === 'admin') {
+        setIsAdmin(true);
+      }
+    }, [auth]);
+  }
 
   const onSuccess = (data) => {
     // console.log(data);
@@ -157,7 +167,30 @@ function Projects() {
             />
           ];
         }
-
+        if (isAdmin) {
+          return [
+            <GridActionsCellItem
+              icon={
+                <EditIcon
+                  color='disabled'
+                  sx={{ '&:hover': { color: '#002db3' } }}
+                />
+              }
+              label='Edit'
+              onClick={handleEditClick(id)}
+            />,
+            <GridActionsCellItem
+              icon={
+                <DeleteIcon
+                  color='disabled'
+                  sx={{ '&:hover': { color: 'red' } }}
+                />
+              }
+              label='Delete'
+              onClick={handleDeleteClick(id)}
+            />
+          ];
+        }
         return [
           <GridActionsCellItem
             icon={
@@ -170,18 +203,19 @@ function Projects() {
             className='textPrimary'
             onClick={handleEditClick(id)}
             color='inherit'
-          />,
-          <GridActionsCellItem
-            icon={
-              <DeleteIcon
-                color='disabled'
-                sx={{ '&:hover': { color: 'red' } }}
-              />
-            }
-            label='Delete'
-            onClick={handleDeleteClick(id)}
-            color='inherit'
           />
+
+          // <GridActionsCellItem
+          //   icon={
+          //     <DeleteIcon
+          //       color='disabled'
+          //       sx={{ '&:hover': { color: 'red' } }}
+          //     />
+          //   }
+          //   label='Delete'
+          //   onClick={handleDeleteClick(id)}
+          //   color='inherit'
+          // />
         ];
       }
     }
