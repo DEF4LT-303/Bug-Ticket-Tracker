@@ -40,7 +40,7 @@ function EditToolbar() {
     isAdmin && (
       <GridToolbarContainer>
         <DialogComponent
-          title='Provide project details'
+          title='Provide Project Details'
           buttonTitle='Create Project'
         >
           <CreateProjectForm handleCreateProject={createProject} />
