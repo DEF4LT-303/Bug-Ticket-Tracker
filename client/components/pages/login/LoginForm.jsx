@@ -130,7 +130,7 @@ export default function LoginForm() {
           </Grid>
         </Box>
         {isError && msgError && (
-          <Alert severity='error' sx={{ marginTop: 5 }} variant='filled'>
+          <Alert severity='error' sx={{ marginTop: 3 }} variant='filled'>
             {msgError}
           </Alert>
         )}
