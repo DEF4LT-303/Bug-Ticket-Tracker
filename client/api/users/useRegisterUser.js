@@ -4,12 +4,10 @@ const addNewUser = (registerPayload) => {
   return axios.post('http://localhost:8000/api/v1/users', registerPayload);
 };
 
-const useRegisterUser = (onSuccess) => {
+const useRegisterUser = (onSuccess, onError) => {
   return useMutation(addNewUser, {
     onSuccess,
-    onError: (err) => {
-      console.log(err.response.data);
-    }
+    onError
   });
 };
 

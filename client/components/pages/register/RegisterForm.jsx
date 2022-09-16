@@ -1,4 +1,5 @@
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Alert from '@mui/material/Alert';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,14 +11,28 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import useRegisterUser from '../../../api/users/useRegisterUser';
+import SuccessSnackbar from '../../common/successSnackbar';
 
 export default function RegisterForm() {
   const router = useRouter();
+
+  const [isError, setIsError] = React.useState(false);
+  const [msgError, setMsgError] = React.useState(null);
+  const [showSnackbar, setShowSnackbar] = React.useState(false);
+
   const onSuccess = (successData) => {
     // console.log(successData.data);
+    setShowSnackbar(true);
     router.push('/login');
   };
-  const { mutate: newUser } = useRegisterUser(onSuccess);
+
+  const onError = (error) => {
+    console.log('test');
+    setIsError(true);
+    setMsgError(error.response.data);
+  };
+
+  const { mutate: newUser } = useRegisterUser(onSuccess, onError);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -46,10 +61,11 @@ export default function RegisterForm() {
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                // error={isError}
                 focused
                 required
                 fullWidth
@@ -60,6 +76,7 @@ export default function RegisterForm() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={isError}
                 required
                 fullWidth
                 id='email'
@@ -70,6 +87,7 @@ export default function RegisterForm() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                // error={isError}
                 required
                 fullWidth
                 name='password'
@@ -106,6 +124,16 @@ export default function RegisterForm() {
             </Grid>
           </Grid>
         </Box>
+        {isError && msgError && (
+          <Alert severity='error' sx={{ marginTop: 5 }} variant='filled'>
+            {msgError}
+          </Alert>
+        )}
+        {console.log(showSnackbar)}
+        <SuccessSnackbar
+          successMessage='Account Created!'
+          showSnackbar={showSnackbar}
+        />
       </Box>
     </Container>
   );
