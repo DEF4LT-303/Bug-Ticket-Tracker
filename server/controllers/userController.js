@@ -23,7 +23,7 @@ const userController = {
       const [user, _] = await UserModel.findByEmail(email);
 
       if (user.length !== 0) {
-        return res.status(401).send('User already exists');
+        return res.status(401).send('User with this email already exists');
       }
 
       // password encryption before adding to DB
