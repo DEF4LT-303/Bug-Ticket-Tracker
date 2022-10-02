@@ -1,7 +1,6 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
-import morgan from 'morgan';
 import RootRouter from './routes/index.js';
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -14,7 +13,8 @@ const app = express();
 app.use(cors(corsOptions));
 
 if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
+  // app.use(morgan('dev'));
+  app.use(express.static('client/build'));
 }
 
 const SERVER_PORT = process.env.SERVER_PORT;
